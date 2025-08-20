@@ -12,8 +12,8 @@ const db = new sqlite3.Database("./mydb.sqlite", (err) => {
     console.log("Connected to sqlite database");
 });
 
-db.run(`DROP TABLE IF EXISTS users`);
-db.run(`CREATE TABLE users(
+
+db.run(`CREATE TABLE user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     content TEXT
@@ -23,7 +23,7 @@ db.run(`CREATE TABLE users(
 // POST method (Insert user)
 app.post("/users", (req, res) => {
     const { name, content } = req.body;
-    db.run(`INSERT INTO users(name, content) VALUES(?, ?)`,
+    db.run(`INSERT INTO user(name, content) VALUES(?, ?)`,
         [name, content],
         function (err) {
             if (err) {
